@@ -9,10 +9,11 @@ langford(N, P, S):-
 
 	checks(P, 1, S),
 
-	alldifferent(P),
-	alldifferent(S),
+	append(P,S,L),
 
-	labeling([P,S]).
+	alldifferent(L),
+
+	labeling(L).
 
 checks([], _, []).
 checks([Hp|Tp], Curr, [Hs|Ts]):-
