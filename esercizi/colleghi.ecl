@@ -1,10 +1,11 @@
 :-lib(fd).
 
-colleghi(Primi, Secondi):-
+colleghi(L):-
     Primi = [A1, B1, C1, D1, F1],
     Secondi = [A2, B2, C2, D2, F2],
 
-    Primi, Secondi :: [1..5],
+    Primi :: [1..5],
+    Secondi :: [1..5],
 
     B1 #= 4,
 
@@ -25,21 +26,16 @@ colleghi(Primi, Secondi):-
 
     minimize(labeling(L),C).
 
-funz_ob([],[],_,_).
+funz_ob([],[],0,_).
 funz_ob([Hp|Tp], [Hs|Ts], C, Curr):-
     Next is Curr + 1,
-    (Hp \= Next -> C1 is C + 1 ; true),
-    (Hs \= Next -> C1 is C + 1 ; true),
-    funz_ob(Tp, Ts, C1, Next).
-
-
-% ho provato a fare un unico predicato per controllare la singola lista ma non va un caz
-errori([], C, _):- 
-    C #= C.
-errori([H|T], C, Curr):-
-    Next is Curr + 1,
-    (H #\= Next -> C1 is C + 1 ; C1 = C),
-    errori(T, C1, Next).
+    funz_ob(Tp, Ts, C1, Next),
+    (Hp #\= Next, Hs #\= Next
+        ->  C #= C1 + 2
+        ;   (Hp #\= Next ; Hs #\= Next)
+            ->  C #= C1 + 1
+            ;   C #= C1
+    ).
 
 
 
