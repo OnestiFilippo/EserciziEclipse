@@ -22,6 +22,6 @@ leq(A,B):-
 
 % IN PROLOG
 %	( Condizione
-%         ->    Then,
+%         ->    Then
 %         ;     Else
 %       ),
