@@ -1,6 +1,7 @@
 :-lib(fd).
+:-lib(fd_global).
 
-colleghi(L):-
+colleghi(Primi, Secondi):-
     Primi = [A1, B1, C1, D1, F1],
     Secondi = [A2, B2, C2, D2, F2],
 
@@ -9,33 +10,40 @@ colleghi(L):-
 
     B1 #= 4,
 
-    C1 #= 4 #\/ C2 #= 4,
+    ((C1 #= 4) #/\ (C2 #\= 4)) #\/ ((C2 #= 4) #/\ C1 #\= 4),
 
-    D1 #\= 3 #/\ D2 #\= 3,
+    (D1 #\= 3), (D2 #\= 3),
 
-    F1 #\= F2 #/\ F1 #\= 5 #/\ F2 #\= 5,
+    (F1 #\= F2),
 
-    A1 #= 2 #\/ A2 #= 2,
+    (A1 #= 2) #\/ (A2 #= 2),
 
-    alldifferent(Primi),
-    alldifferent(Secondi),
-
-    funz_ob(Primi,Secondi, C, 0),
-
-    append(Primi, Secondi, L),
-
-    minimize(labeling(L),C).
+    fd:alldifferent(Primi),
+    fd:alldifferent(Secondi).
 
 funz_ob([],[],0,_).
 funz_ob([Hp|Tp], [Hs|Ts], C, Curr):-
     Next is Curr + 1,
+
     funz_ob(Tp, Ts, C1, Next),
-    (Hp #\= Next, Hs #\= Next
+
+    (Hp #\= Curr, Hs #\= Curr
         ->  C #= C1 + 2
-        ;   (Hp #\= Next ; Hs #\= Next)
+        ;   (Hp #\= Curr ; Hs #\= Curr)
             ->  C #= C1 + 1
             ;   C #= C1
     ).
 
+funz_ob2([],[],[],_).
+funz_ob2([Hp|Tp], [Hs|Ts],[B1,B2|R],Curr):-
+    #\=(Hp,Curr,B1),
+    #\=(Hs,Curr,B2),
+    Next is Curr +1,
+    funz_ob2(Tp,Ts,R,Next).
 
-
+cop(L):-
+    colleghi(Primi, Secondi),
+    funz_ob2(Primi, Secondi, C, 1),
+    sumlist(C,S),
+    append(Primi, Secondi, L),
+    minimize(labeling(L),S).
