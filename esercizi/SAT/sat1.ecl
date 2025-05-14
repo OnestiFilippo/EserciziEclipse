@@ -40,6 +40,7 @@ select_variables([N|Literals],Variables,[V|Vs]):-
     ),
     select_variables(Literals,Variables,Vs).
 
+% DA FINIRE
 orlist([X]):- !, X=1.
 orlist(L):- cerca_uno(L), !.
 orlist(L):-
@@ -55,6 +56,7 @@ cerca_uno([H|T]):-
     ground(H), H = 1.
 cerca_uno([H|T]):-cerca_uno(T).
 
+% DA RIVEDERE
 rimuovi_zero([], []).
 rimuovi_zero([0|T],L):-
     rimuovi_zero(T,T).
