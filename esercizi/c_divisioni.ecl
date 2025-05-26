@@ -7,7 +7,7 @@ divisioni(Fratelli, N):-
 
     calcola_cubi(1, N, Pesi),
     
-    sumlist(Pesi, TotP),
+    somma_lista(Pesi, TotP),
 
     MetaP * 2 #= TotP,
 
@@ -17,6 +17,8 @@ divisioni(Fratelli, N):-
 
     labeling(Fratelli).
 
+somma_lista([], 0).
+somma_lista([H|T], K):- K#=H+K1, somma_lista(T,K1).
 
 calcola_cubi(N, N, [P]):- !, P is N*N*N.
 calcola_cubi(I1, N, [Peso|R]):-
@@ -26,8 +28,8 @@ calcola_cubi(I1, N, [Peso|R]):-
     calcola_cubi(I, N, R).
 
 somma_pesi([],[], 0).
-somma_pesi([F|Rf], [P|Rp], P):-
-    P #= F*P + P1,
-    somma_pesi(Rf, Rp, P1).
+somma_pesi([F|Rf], [P|Rp], Somma):-
+    Somma #= F*P + Somma1,
+    somma_pesi(Rf, Rp, Somma1).
 
 
