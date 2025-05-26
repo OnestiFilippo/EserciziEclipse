@@ -20,3 +20,4 @@ nodo(4).
 nodo(5).
 
 1 {color(X,C)} 1 :- nodo(X), palette(C).
+
