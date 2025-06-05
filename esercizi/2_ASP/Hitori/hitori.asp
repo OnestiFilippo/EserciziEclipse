@@ -15,8 +15,10 @@ connesso(R,C) :- bianco(R,C), {bianco(R, C+1);bianco(R, C-1);bianco(R+1,C);bianc
 
 % A partire da una cella bianca si devono raggiungere tutte le altre
 
-raggiungibile(1,1).
-raggiungibile(R,C) :- bianco(R,C), {bianco(R+1,C): raggiungibile(R+1,C); bianco(R-1,C): raggiungibile(R-1,C); bianco(R,C+1): raggiungibile(R,C+1); bianco(R,C-1) :raggiungibile(R,C-1)}>=1.
+1{root(R,C):bianco(R,C)}1.
+raggiungibile(R,C):-root(R,C).
+
+raggiungibile(R,C) :- bianco(R,C), {raggiungibile(R+1,C); raggiungibile(R-1,C); raggiungibile(R,C+1); raggiungibile(R,C-1)}>=1.
 
 :- bianco(R,C), not raggiungibile(R,C).
 
@@ -25,3 +27,4 @@ vicineR(R1,R2,C) :- schema(R1,C,_),schema(R2,C,_), |R1 - R2| = 1.
 vicineC(C1,C2,R) :- schema(R,C1,_),schema(R,C2,_), |C1 - C2| = 1.
 
 #show nero/2.
+#show root/2.
