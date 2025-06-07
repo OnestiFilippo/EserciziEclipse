@@ -42,5 +42,5 @@ impose_precedenze(ST, [[ID1,ID2] | R]):-
 funz_ob(_,[],_).
 funz_ob(ST, [[ID,DL]|Ro], [C|Rc]):-
     nth1(ID, ST, X),
-    X + 1 #=< DL #<=> C,
+    X + 1 #<= DL #<=> C,
     funz_ob(ST, Ro, Rc).
