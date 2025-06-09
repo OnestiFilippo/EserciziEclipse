@@ -13,8 +13,6 @@ robot(Sequenza, MaxD, Pos):-
 
     funz_ob(Pos, Sequenza, Clist),
 
-    write(Clist),
-
     fd_global:sumlist(Clist, C),
 
     minimize(labeling(Pos), C).
@@ -26,7 +24,7 @@ impose_distanza(I, [El|R], MaxD):-
     I1 is I + 1,
     impose_distanza(I1, R, MaxD).
 
-funz_ob([_|[]], _, []).
+funz_ob([_], _, []).
 funz_ob([P,P1|R], Sequenza, [C|Rc]):-
     nth1(P, Sequenza, X),
     nth1(P1, Sequenza, Y),
