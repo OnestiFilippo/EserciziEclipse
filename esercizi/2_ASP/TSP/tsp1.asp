@@ -20,8 +20,8 @@ cost(6,3,3).
 
 edge(X,Y) :- cost(X,Y,C).
 
-{cycle(X,Y) : edge(X,Y)} = 1 :- node(X).
-{cycle(X,Y) : edge(X,Y)} = 1 :- node(Y).
+{cycle(X,Y) : edge(X,Y)} = 1 :- node(X). % Esattamente un arco uscente
+{cycle(X,Y) : edge(X,Y)} = 1 :- node(Y). % Esattamente un arco entrante
 
 reached(Y) :- cycle(1,Y).
 reached(Y) :- cycle(X,Y), reached(X).
