@@ -1,2 +1,1 @@
-# Esercizi Eclipse
-## Intelligenza Artificiale per l'Ottimizzazione Vincolata
+# Esercizi Intelligenza Artificiale per l'Ottimizzazione Vincolata
